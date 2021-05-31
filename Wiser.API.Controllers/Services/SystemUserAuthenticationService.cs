@@ -124,6 +124,10 @@ namespace Wiser.API.BL.Services
             };
         }
 
+        /// <summary>
+        /// Check for User is Logged in
+        /// </summary>
+        /// <returns></returns>
         public async Task<Response<LoginResponse>> IsUserLoggedIn()
         {
             var id = _httpContextAccessor.HttpContext.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
