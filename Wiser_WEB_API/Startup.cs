@@ -41,6 +41,7 @@ namespace Wiser_WEB_API
             services.AddHttpContextAccessor();
             // Add service form Database Context
             services.AddDbContext<WiserContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            // Add Automapper profile
             services.AddAutoMapper(typeof(AutomapperProfiles).Assembly);
             services.AddAuthorization();
             // Add service for Controllers
@@ -107,7 +108,9 @@ namespace Wiser_WEB_API
 
             // Register Dependency for Custom Services
             services.AddScoped<ISystemUserAuthenticationService, SystemUserAuthenticationService>();
-           
+            services.AddScoped<IDepartmentService, DepartmentService>();
+            services.AddScoped<IEmployeeService, EmployeeService>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

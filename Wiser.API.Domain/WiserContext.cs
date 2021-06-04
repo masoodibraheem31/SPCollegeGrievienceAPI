@@ -25,6 +25,12 @@ namespace Wiser.API.Entities
                 if (typeof(IBaseModel).IsAssignableFrom(type.ClrType))
                     modelBuilder.SetSoftDeleteFilter(type.ClrType);
             }
+            // Maintain Relationship
+            modelBuilder.Entity<Employee>()
+                .HasOne(x => x.Department)
+                .WithMany(x => x.Employees)
+                .HasForeignKey(x => x.DepartmentId);
+
             base.OnModelCreating(modelBuilder);
         }
         public override int SaveChanges()
@@ -55,5 +61,7 @@ namespace Wiser.API.Entities
         }
 
         public DbSet<Institute> Institutes { get; set; }
+        public DbSet<Department> Departments { get; set; }
+        public DbSet<Employee> Employees { get; set; }
     }
 }
